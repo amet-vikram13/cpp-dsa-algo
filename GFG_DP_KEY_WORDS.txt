@@ -1,0 +1,14 @@
+GFG DP KEY WORDS
+1) Count
+2) Palindrome
+3) Subsequence
+4) Subarray
+5) Subset
+6) Longest
+7) Smallest
+8) Maximum
+9) Minimum 
+10) Shortest
+11) Largest
+13) Print, All
+14) Substring
