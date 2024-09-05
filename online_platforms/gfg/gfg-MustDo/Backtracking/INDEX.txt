@@ -1,5 +1,0 @@
-1) N-Queen Problem
-2) Solve the Sudoku
-3) Rat in a Maze Problem
-4) Word Boggle
-5) 
