@@ -1,1 +1,3 @@
-Introduction to algorithms-Thomas H. Cormen.pdf
+**/*.idea
+**/.DS_Store
+**/*.o
