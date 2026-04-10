@@ -2,16 +2,16 @@
 using namespace std;
 
 /*
-T1, T2 and T3 are subtrees of the tree rooted with y (on left side) 
-or x (on right side)           
+T1, T2 and T3 are subtrees of the tree rooted with y (on left side)
+or x (on right side)
 
                 y                               x
                / \     Right Rotation          /  \
-              x   T3   – – – – – – – >        T1   y 
+              x   T3   – – – – – – – >        T1   y
              / \       < - - - - - - -            / \
             T1  T2     Left Rotation            T2  T3
 
-Keys in both of the above trees follow the following order 
+Keys in both of the above trees follow the following order
       keys(T1) < key(x) < keys(T2) < key(y) < keys(T3)
 So BST property is not violated anywhere.
 
@@ -19,10 +19,10 @@ T1, T2, T3 and T4 are subtrees. x is the new key inserted.
 
 A) Left Left Case
 
-         z                                      y 
+         z                                      y
         / \                                   /   \
        y   T4      Right Rotate (z)          x      z
-      / \          - - - - - - - - ->      /  \    /  \ 
+      / \          - - - - - - - - ->      /  \    /  \
      x   T3                               T1  T2  T3  T4
     / \
   T1   T2
@@ -30,7 +30,7 @@ A) Left Left Case
 B) Left Right Case
 
      z                               z                           x
-    / \                            /   \                        /  \ 
+    / \                            /   \                        /  \
    y   T4  Left Rotate (y)        x    T4  Right Rotate(z)    y      z
   / \      - - - - - - - - ->    /  \      - - - - - - - ->  / \    / \
 T1   x                          y    T3                    T1  T2 T3  T4
@@ -40,7 +40,7 @@ T1   x                          y    T3                    T1  T2 T3  T4
 C) Right Right Case
 
   z                                y
- /  \                            /   \ 
+ /  \                            /   \
 T1   y     Left Rotate(z)       z      x
     /  \   - - - - - - - ->    / \    / \
    T2   x                     T1  T2 T3  T4
@@ -50,7 +50,7 @@ T1   y     Left Rotate(z)       z      x
 D) Right Left Case
 
    z                            z                            x
-  / \                          / \                          /  \ 
+  / \                          / \                          /  \
 T1   y   Right Rotate (y)    T1   x      Left Rotate(z)   z      y
     / \  - - - - - - - - ->     /  \   - - - - - - - ->  / \    / \
    x   T4                      T2   y                  T1  T2  T3  T4
@@ -133,10 +133,10 @@ class AVLtree
 		}
 
 		/*
-		The AVL trees are more balanced compared to Red Black Trees, 
+		The AVL trees are more balanced compared to Red Black Trees,
 		but they may cause more rotations during insertion and deletion.
-		So for frequent insertions and deletions, use Red Black trees. 
-		And if the insertions and deletions are less frequent and search 
+		So for frequent insertions and deletions, use Red Black trees.
+		And if the insertions and deletions are less frequent and search
 		is more frequent operation, then use AVL tree.
 		*/
 		// Complexity : Time O(h) where h = lg n
@@ -165,7 +165,7 @@ class AVLtree
 				root->left = leftRotate(root->left);
 				return rightRotate(root);
 			}
-			
+
 			if (balance<-1 && key > root->right->data)
 				return leftRotate(root);
 
@@ -174,7 +174,6 @@ class AVLtree
 				root->right = rightRotate(root->right);
 				return leftRotate(root);
 			}
-			
 
 			return root;
 		}
@@ -210,9 +209,9 @@ class AVLtree
 		}
 
 		/*
-		Let z be the first unbalanced node, y be the larger height 
+		Let z be the first unbalanced node, y be the larger height
 		child of z, and x be the larger height child of y.
-		The current node must be one of the ancestors of the deleted 
+		The current node must be one of the ancestors of the deleted
 		node. Update the height of the current node.
 		*/
 		// Hibbard Deletion
@@ -258,8 +257,8 @@ class AVLtree
 				root->right = rightRotate(root->right);
 				return leftRotate(root);
 			}
-			
-			return root;			
+
+			return root;
 
 
 		}

@@ -4,17 +4,17 @@ using namespace std;
 
 /*
 Notes:
-1) The code calculates shortest distance, but doesn’t calculate the path information. We can create a parent array, 
-   update the parent array when distance is updated (like prim’s implementation) and use it show the shortest path 
+1) The code calculates shortest distance, but doesn’t calculate the path information. We can create a parent array,
+   update the parent array when distance is updated (like prim’s implementation) and use it show the shortest path
    from source to different vertices.
 
 2) The code is for undirected graph, same dijkstra function can be used for directed graphs also.
 
-3) The code finds shortest distances from source to all vertices. If we are interested only in shortest distance from 
-   the source to a single target, we can break the for the loop when the picked minimum distance vertex is equal to 
+3) The code finds shortest distances from source to all vertices. If we are interested only in shortest distance from
+   the source to a single target, we can break the for the loop when the picked minimum distance vertex is equal to
    target (Step 3.a of the algorithm).
 
-4) Dijkstra’s algorithm doesn’t work for graphs with negative weight edges. For graphs with negative weight edges, 
+4) Dijkstra’s algorithm doesn’t work for graphs with negative weight edges. For graphs with negative weight edges,
    Bellman–Ford algorithm can be used, we will soon be discussing it as a separate post.
 */
 
@@ -146,12 +146,12 @@ class IndexMinPQ
 		{
 			if(contains(index)) return;
 			N++;
-			
+
 			pq[N]       = index;    // (pq[i]=) i is position of Index index in heap
-                    				// heap operations are applied on this array    
-			
+                    				// heap operations are applied on this array
+
 			qp[index]   = N;		// (qp[i]=) N is the heap position of the key with 	Index index
-			
+
 			Keys[index] = key;		// (keys[i]=) key is priority of Index index
 			swim(N);
 		}
@@ -192,12 +192,12 @@ class IndexMinPQ
 };
 
 /*
-The time complexity of the above code/algorithm looks O(V^2) as there are two nested while loops. If we take a 
-closer look, we can observe that the statements in inner loop are executed O(V+E) times (similar to BFS). The 
-inner loop has decreaseKey() operation which takes O(LogV) time. So overall time complexity is O(E+V)*O(LogV) 
+The time complexity of the above code/algorithm looks O(V^2) as there are two nested while loops. If we take a
+closer look, we can observe that the statements in inner loop are executed O(V+E) times (similar to BFS). The
+inner loop has decreaseKey() operation which takes O(LogV) time. So overall time complexity is O(E+V)*O(LogV)
 which is O((E+V)*LogV) = O(ELogV)
-Note that the above code uses Binary Heap for Priority Queue implementation. Time complexity can be reduced 
-to O(E + VLogV) using Fibonacci Heap. The reason is, Fibonacci Heap takes O(1) time for decrease-key operation 
+Note that the above code uses Binary Heap for Priority Queue implementation. Time complexity can be reduced
+to O(E + VLogV) using Fibonacci Heap. The reason is, Fibonacci Heap takes O(1) time for decrease-key operation
 while Binary Heap takes O(Logn) time.
 Complexity : Time O(ELogV)
 */
@@ -222,7 +222,7 @@ class DijkstraSP
 					distTo[w] = distTo[v]+e.weight;
 					edgeTo[w] = e;
 					if    (pq->contains(w)) pq->changeKey(w,distTo[w]);
-					else  					pq->insert(w,distTo[w]); 
+					else  					pq->insert(w,distTo[w]);
 				}
 			}
 		}
