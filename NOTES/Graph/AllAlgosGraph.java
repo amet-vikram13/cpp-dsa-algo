@@ -38,6 +38,7 @@ public class AllAlgosGraph {
     void _bfs(int st) {
         Queue<Integer> q = new LinkedList<>();
         q.push(st);
+        marked[st] = true;
         while(!q.isEmpty()) {
             int v = q.poll();
             for(int w : adj(v)) {
@@ -95,26 +96,10 @@ public class AllAlgosGraph {
     }
 
     public boolean cycleDetection() {
-        // Use WQUFPC or BFS
-        Queue<Integer> q = new LinkedList<>();
-        marked = new boolean[V];
-        boolean onStack = new boolean[V];
-        q.push(st);
-        while(!q.isEmpty()) {
-            int v = q.poll();
-            onStack[v] = true;
-            for(int w : adj(v)) {
-                if (!marked[w]) {
-                    marked[w] = true;
-                    q.push(w);
-                }
+        // Use WQUFPC or DFS only
+        // No algorithm for cycle detection in Directed Graph using pure BFS only
+        // DFS works for both Directed and Undirected Graphs
 
-                if (onStack[w]) { return true; } // works for directed
-                // if (v != w) return true; // works for undirected
-            }
-            onStack[v] = false;
-        }
-        return false;
     }
 
     public boolean isBipartite() {
@@ -533,19 +518,21 @@ public class AllAlgosGraph {
         Queue<Integer> q = new Queue<>();
         boolean[] onQ = boolean[V];
         q.offer(src);
-        onQ[src] = true;
+        onQ[src] = true; // This is basically marked
         int cost = 0;
         while(!q.isEmpty() && !hasNegativeCycle()) {
             int v = q.poll();
             for(Edge e : adjListWeighted[v]) {
-                if(distTo[e.w] > distTo[v] + e.weight) {
-                    distTo[e.w] = distTo[v] + e.weight;
-                    edgeTo[e.w] = e;
-                }
                 if(!onQ[e.w]) {
                     q.offer(e.w);
                     onQ[e.w] = true;
                 }
+
+                if(distTo[e.w] > distTo[v] + e.weight) {
+                    distTo[e.w] = distTo[v] + e.weight;
+                    edgeTo[e.w] = e;
+                }
+
                 if(cost++ % V == 0) {
                     /*
                     Use Directed Edge cycle finder code.

@@ -1,0 +1,111 @@
+1) Monotonic Stack - Next Greater element II, Largest Rectangle in histogram, Trapping rain water
+{
+    - Helps in thinking two pointers as well
+    - consider rlim and llim and the current element as an inflection point
+    - Inflection points, peak elements
+}
+2) Peak Valley Approach -- FInding Peak element in Ologn , Buy sell stock II
+3) Bi directional BFS - Word ladder I II, Open Lock
+4) Multi source bfs - 0/1 Matrix, Map of Highest Peak, Rotten Oranges, Walls and Gates
+5) Multi source dfs - Flood fill, no of islands
+{
+    If shortest distance is not a concern, then always think
+    from perspective of multi source dfs, else multi source bfs
+}
+6) Monotonic Deque - Sliding window maximum
+7) Binary Exponentiation - Pow(x,n)
+8) Catalan numbers - Unique Binary Trees
+9) Tail Recursion
+10) Greedy technique -- Kadane's algorithm
+11) Making own hash -- Group Anagrams
+12) Simulation technique -- Car pooling (Bucketsort)
+13) Terenary Search -- variant of Binary Search
+while (low <= high) {
+    int mid1 = low + (high - low) / 3;
+    int mid2 = high - (high - low) / 3;
+    int res1 = condition
+    int res2 = condition
+    if (res1 == 0)
+        return mid1;
+    if (res2 == 0)
+        return mid2;
+    else if (res1 < 0)
+        high = mid1 - 1;
+    else if (res2 > 0)
+        low = mid2 + 1;
+    else {
+        low = mid1 + 1;
+        high = mid2 - 1;
+    }
+}
+14) Binary Search Templates :-
+mid = left + (right - left)//2;
+
+Template 1 (left <= right) is the "classic" form. You check mid on every iteration and exit the moment you
+find the target. Because you either find it or exhaust the space, there's nothing left to check afterward.
+Use this whenever you can determine the answer from mid alone, without peeking at its neighbors.
+{
+    - two conditional statements are used, one for checking mid and one for checking mid < target
+    - mid can be left or right => mid == left == right
+    - update as l = mid-1 and r = mid+1;
+    - No post processing
+}
+Template 2 (left < right) is for when your decision logic needs to look one step ahead — specifically at
+mid + 1. The loop guarantees at least 2 elements are present at every step, so mid + 1 is always safe to access. When the loop exits, left == right and you have exactly 1 element remaining that you must check manually. This is the go-to for "find the first/last position that satisfies a condition" problems.
+{
+    - Only one conditional statements is used for checking mid < target
+    - mid is always < right; so mid+1 always exists
+    - update as l = mid+1 and r = mid;
+    - Only 1 index requires post processing
+}
+Template 3 (left + 1 < right) is the most conservative. It always keeps at least 3 elements in the search
+space, so both mid - 1 and mid + 1 are always safe. When the loop exits, you have exactly 2 elements left,
+and you assess them in post-processing. This is useful when you need to compare a candidate with both its
+immediate neighbors before committing.
+{
+   - Only one conditional statements is used for checking mid < target
+   - mid is always > left and mid is always < right
+   - so mid+1 and mid-1 both exists
+   - update as l = mid and r = mid;
+   - 2 Index requires post processing
+
+    Finding Peak element
+}
+A quick rule of thumb: if you're searching for a value, use T1. If you're searching for a boundary that
+depends on what's to the right, use T2. If you're searching for a local extremum that depends on both
+sides, use T3.
+
+15) Floyd's Tortoise and Hare Algorithm (finding node where cycle start in list)
+a -> dist from head to the node where cycle starts
+b -> dist from node where cycle starts to first meeting point inside cycle
+c -> length of cycle
+
+fast pointer (2m/s) will be already inside cycle before slow pointer (1m/s) and will have taken few laps (k) also
+
+a+b is dist travelled by slow pointer and k*c is dist travelled by fast pointer inside cycle.
+
+Total dist travelled by fast is a + b + k*c
+Total dist travelled by slow is a + b
+
+Now since is fast is twice as fast as slow so
+
+2*(a + b) = a+b+k*c
+
+Therefore a+b = k*c
+
+Now restart by starting fast pointer from head and slow pointer from first meeting place
+AT SAME SPEED.
+
+The next time they meet will be start of node cycle because
+
+dist travelled by slow k*c-b and dist travelled by fast a and by above equation k*c-b = a;
+
+
+16) For matrix boundary traversals like spiral traversal or rotations,
+think from perspective of 2 set of two pointers :-
+- up and down pointers (for row boundaries)
+- left and right pointers (for col boundaries)
+- traversal or operations keeps on happening until up==down or left==right
+- At the end, either a single element will be left (square matrix)
+or a single row (cols > rows matrix) or a single column (rows > cols matrix)
+- Process the above last as end case

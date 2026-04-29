@@ -1,2 +1,3 @@
-QuickSelect, Quicksort Counting Sort
+QuickSelect, Quicksort, Counting Sort
 XOR Doubly Linked List
+Bucket sort
